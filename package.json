@@ -1,0 +1,59 @@
+{
+  "name": "create-vite-typescript-oxc",
+  "version": "0.1.0",
+  "description": "Create a minimal Vite and TypeScript app with Oxlint and Oxfmt.",
+  "keywords": [
+    "create",
+    "oxc",
+    "oxfmt",
+    "oxlint",
+    "template",
+    "typescript",
+    "vite"
+  ],
+  "homepage": "https://github.com/spinualexandru/vite-typescript-oxc#readme",
+  "bugs": {
+    "url": "https://github.com/spinualexandru/vite-typescript-oxc/issues"
+  },
+  "license": "MIT",
+  "author": "Alex Spinu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spinualexandru/vite-typescript-oxc.git"
+  },
+  "bin": {
+    "create-vite-typescript-oxc": "bin/create.mjs"
+  },
+  "files": [
+    "bin",
+    "template"
+  ],
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "vite template",
+    "build": "tsc -p template && vite build template",
+    "preview": "vite preview template",
+    "typecheck": "tsc -p template",
+    "lint": "oxlint bin scripts test && oxlint -c template/.oxlintrc.json template/src",
+    "lint:fix": "oxlint --fix bin scripts test && oxlint --fix -c template/.oxlintrc.json template/src",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "test": "node --test test/*.test.mjs",
+    "test:smoke": "node scripts/smoke.mjs",
+    "check": "pnpm fmt:check && pnpm lint && pnpm test && pnpm build",
+    "prepublishOnly": "pnpm check && pnpm test:smoke"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "packageManager": "pnpm@12.10.1"
+}
