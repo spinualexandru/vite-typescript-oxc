@@ -16,6 +16,8 @@ const packageManager = JSON.parse(
 function run(command, args, cwd, capture = false) {
   const result = spawnSync(command, args, {
     cwd,
+    // A publish dry run must still create and install our temporary test tarball.
+    env: { ...process.env, npm_config_dry_run: 'false' },
     encoding: 'utf8',
     stdio: capture ? 'pipe' : 'inherit',
     timeout: 180_000,
